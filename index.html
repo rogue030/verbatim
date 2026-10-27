@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Verbatim</title>
+<meta name="description" content="Live transcription for meetings and lectures, with summaries and export.">
+<meta name="theme-color" content="#F4F7F5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0E1412" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Verbatim">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="format-detection" content="telephone=no">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="styles.css">
+<script type="module" src="app.js"></script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-gear" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 15.2a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4Z"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"/></symbol>
+    <symbol id="i-back" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M15 5l-7 7 7 7"/></symbol>
+    <symbol id="i-more" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.9" fill="currentColor"/><circle cx="12" cy="12" r="1.9" fill="currentColor"/><circle cx="19" cy="12" r="1.9" fill="currentColor"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path fill="currentColor" d="M12 3.2l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L12 16.5l-5.4 2.9 1.2-5.9-4.4-4.1 6-.7z"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><rect x="6.5" y="5" width="3.6" height="14" rx="1" fill="currentColor"/><rect x="13.9" y="5" width="3.6" height="14" rx="1" fill="currentColor"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path fill="currentColor" d="M8 5.2v13.6a.8.8 0 0 0 1.2.7l10.6-6.8a.8.8 0 0 0 0-1.4L9.2 4.5A.8.8 0 0 0 8 5.2Z"/></symbol>
+    <symbol id="i-stop" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2.2" fill="currentColor"/></symbol>
+    <symbol id="i-rec" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.5" fill="currentColor"/></symbol>
+    <symbol id="i-share" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M12 3v12M7.5 7.5 12 3l4.5 4.5M6 11H5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1h-1"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.5c.5 3.9 2.6 6.9 7.5 7.6v.8c-4.9.7-7 3.7-7.5 7.6h-.8c-.5-3.9-2.6-6.9-7.5-7.6v-.8c4.9-.7 7-3.7 7.5-7.6Z"/><path fill="currentColor" d="M19 15.5c.2 1.6 1 2.6 2.7 2.9v.4c-1.7.3-2.5 1.3-2.7 2.9h-.4c-.2-1.6-1-2.6-2.7-2.9v-.4c1.7-.3 2.5-1.3 2.7-2.9Z"/></symbol>
+    <symbol id="i-people" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M9 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7ZM2.5 20c.6-3.4 3.2-5.5 6.5-5.5s5.9 2.1 6.5 5.5M16 4.3a3.5 3.5 0 0 1 0 6.4M18 14.8c1.9.7 3.2 2.5 3.5 5.2"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M12 6.5C10.3 5 7.8 4.5 4 4.5v13c3.8 0 6.3.5 8 2 1.7-1.5 4.2-2 8-2v-13c-3.8 0-6.3.5-8 2Zm0 0v13"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8.5" y="8.5" width="11.5" height="11.5" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path fill="none" stroke="currentColor" stroke-width="1.8" d="M15.5 8.5V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v7.5a2 2 0 0 0 2 2h2.5"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 20h14"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6" fill="none" stroke="currentColor" stroke-width="1.9"/><path stroke="currentColor" stroke-width="1.9" stroke-linecap="round" d="m15 15 5 5"/></symbol>
+  </defs>
+</svg>
+
+<div id="app" class="app">
+
+  <!-- Library: start a recording, browse past sessions -->
+  <section id="view-library" class="view library">
+    <div class="wrap">
+      <header class="lib-head">
+        <h1 class="large-title">Verbatim</h1>
+        <button id="btn-settings" class="icon-btn" type="button" aria-label="Settings"><svg><use href="#i-gear"/></svg></button>
+      </header>
+
+      <div id="support-banner" class="banner" role="alert" hidden></div>
+
+      <div class="start-row">
+        <button id="btn-new-meeting" class="start-card" type="button">
+          <span class="start-icon"><svg><use href="#i-people"/></svg></span>
+          <span class="start-label"><span class="rec-pip"></span>Meeting</span>
+          <span class="start-sub">Speakers, decisions, action items</span>
+        </button>
+        <button id="btn-new-lecture" class="start-card" type="button">
+          <span class="start-icon"><svg><use href="#i-book"/></svg></span>
+          <span class="start-label"><span class="rec-pip"></span>Lecture</span>
+          <span class="start-sub">Key terms, assignments, review questions</span>
+        </button>
+      </div>
+
+      <div id="now-recording"></div>
+
+      <label class="search" for="search">
+        <svg aria-hidden="true"><use href="#i-search"/></svg>
+        <input id="search" type="search" placeholder="Search titles, transcripts and notes" autocomplete="off" enterkeyhint="search">
+      </label>
+
+      <div id="session-list" class="session-list"></div>
+
+      <p class="foot-note">Transcripts are saved on this iPhone only. Use Export or Settings&nbsp;›&nbsp;Back up to keep a copy elsewhere.</p>
+    </div>
+  </section>
+
+  <!-- Session: live recording or review -->
+  <section id="view-session" class="view session" hidden>
+    <header class="bar">
+      <div class="bar-inner">
+        <button id="btn-back" class="bar-btn" type="button"><svg><use href="#i-back"/></svg><span>Library</span></button>
+        <button id="session-title" class="bar-title" type="button" aria-label="Rename"></button>
+        <button id="btn-more" class="bar-btn icon-only" type="button" aria-label="More options"><svg><use href="#i-more"/></svg></button>
+      </div>
+    </header>
+
+    <div id="rec-strip" class="rec-strip" hidden>
+      <div class="rec-strip-inner">
+        <span id="rec-dot" class="rec-dot"></span>
+        <span id="rec-status" class="rec-status">Listening</span>
+        <button id="btn-resume-stalled" class="resume-pill" type="button" hidden>Tap to resume</button>
+        <span class="rec-spacer"></span>
+        <span id="rec-words" class="rec-words"></span>
+        <span id="rec-timer" class="rec-timer">00:00</span>
+      </div>
+      <div id="rec-hint" class="rec-hint" hidden></div>
+    </div>
+
+    <nav class="tabs" role="tablist">
+      <div class="tabs-inner">
+        <button id="tab-transcript" class="tab" role="tab" aria-selected="true" type="button">Transcript</button>
+        <button id="tab-summary" class="tab" role="tab" aria-selected="false" type="button">Summary</button>
+      </div>
+    </nav>
+
+    <div id="pane-transcript" class="pane" role="tabpanel">
+      <div class="wrap">
+        <ol id="transcript" class="transcript"></ol>
+        <div id="empty-transcript" class="empty-transcript" hidden>
+          <p class="empty-title">Listening for speech</p>
+          <p>Words appear here as people talk. Tap a speaker below when someone else starts talking, and tap the star to mark an important moment.</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="pane-summary" class="pane" role="tabpanel" hidden>
+      <div class="wrap" id="summary-body"></div>
+    </div>
+
+    <button id="jump-live" class="jump-live" type="button" hidden>Jump to live</button>
+
+    <footer id="dock" class="dock">
+      <div class="dock-inner">
+        <div id="speaker-row" class="speaker-row" hidden></div>
+        <div id="controls-live" class="controls" hidden>
+          <button id="btn-mark" class="ctl" type="button"><svg><use href="#i-star"/></svg><span>Mark</span></button>
+          <button id="btn-pause" class="ctl" type="button"><svg><use href="#i-pause"/></svg><span>Pause</span></button>
+          <button id="btn-stop" class="ctl ctl-stop" type="button"><svg><use href="#i-stop"/></svg><span>Stop</span></button>
+        </div>
+        <div id="controls-review" class="controls" hidden>
+          <button id="btn-record-more" class="ctl" type="button"><svg class="red"><use href="#i-rec"/></svg><span>Record more</span></button>
+          <button id="btn-summarize" class="ctl" type="button"><svg><use href="#i-spark"/></svg><span>Summarize</span></button>
+          <button id="btn-export" class="ctl ctl-primary" type="button"><svg><use href="#i-share"/></svg><span>Export</span></button>
+        </div>
+      </div>
+    </footer>
+  </section>
+</div>
+
+<div id="scrim" class="scrim" hidden></div>
+
+<!-- Export -->
+<section id="sheet-export" class="sheet" role="dialog" aria-modal="true" aria-labelledby="export-title" hidden>
+  <div class="sheet-grip"></div>
+  <h2 id="export-title" class="sheet-title">Export transcript</h2>
+  <div class="field">
+    <span class="field-label">Format</span>
+    <div id="export-format" class="seg-control" role="radiogroup" aria-label="Format">
+      <button type="button" role="radio" data-format="docx">Word</button>
+      <button type="button" role="radio" data-format="txt">Text</button>
+      <button type="button" role="radio" data-format="md">Markdown</button>
+      <button type="button" role="radio" data-format="json">Backup</button>
+    </div>
+    <p id="export-format-note" class="field-note"></p>
+  </div>
+  <div id="export-options" class="field">
+    <span class="field-label">Include</span>
+    <label class="toggle-row" for="opt-summary"><span>Summary and action items</span><input id="opt-summary" type="checkbox" class="switch"></label>
+    <label class="toggle-row" for="opt-stamps"><span>Timestamps</span><input id="opt-stamps" type="checkbox" class="switch"></label>
+    <label class="toggle-row" for="opt-speakers"><span>Speaker names</span><input id="opt-speakers" type="checkbox" class="switch"></label>
+  </div>
+  <div class="sheet-actions">
+    <button id="btn-do-share" class="btn btn-primary" type="button"><svg><use href="#i-share"/></svg>Share or save to Files</button>
+    <div class="btn-pair">
+      <button id="btn-do-download" class="btn" type="button"><svg><use href="#i-down"/></svg>Download</button>
+      <button id="btn-do-copy" class="btn" type="button"><svg><use href="#i-copy"/></svg>Copy text</button>
+    </div>
+  </div>
+</section>
+
+<!-- Settings -->
+<section id="sheet-settings" class="sheet sheet-tall" role="dialog" aria-modal="true" aria-labelledby="settings-title" hidden>
+  <div class="sheet-grip"></div>
+  <div class="sheet-head">
+    <h2 id="settings-title" class="sheet-title">Settings</h2>
+    <button class="btn-text" type="button" data-close>Done</button>
+  </div>
+
+  <div class="field">
+    <label class="field-label" for="set-lang">Speech language</label>
+    <select id="set-lang"></select>
+    <p class="field-note">Applies to new recordings. Pick the language people will speak.</p>
+  </div>
+
+  <div class="field">
+    <span class="field-label">Timestamps</span>
+    <div id="set-stamps" class="seg-control" role="radiogroup" aria-label="Timestamps">
+      <button type="button" role="radio" data-value="elapsed">Time into recording</button>
+      <button type="button" role="radio" data-value="clock">Time of day</button>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="field-label" for="set-size">Transcript text size</label>
+    <input id="set-size" type="range" min="15" max="26" step="1">
+    <p id="size-preview" class="size-preview">The quick brown fox jumps over the lazy dog.</p>
+  </div>
+
+  <div class="field">
+    <label class="toggle-row" for="set-awake"><span>Keep the screen on while recording</span><input id="set-awake" type="checkbox" class="switch"></label>
+    <p class="field-note">iPhone stops listening when the screen locks, so this is on by default.</p>
+  </div>
+
+  <div class="field" id="field-api">
+    <label class="field-label" for="set-key">Claude API key for summaries</label>
+    <div class="key-row">
+      <input id="set-key" type="password" placeholder="sk-ant-…" autocomplete="off" autocapitalize="off" spellcheck="false">
+      <button id="btn-save-key" class="btn btn-small" type="button">Save</button>
+    </div>
+    <p id="key-status" class="field-note"></p>
+    <p class="field-note">Create a key at <a href="https://console.anthropic.com/settings/keys" target="_blank" rel="noopener">console.anthropic.com</a>. The key is stored only on this device, and Verbatim sends it only to Anthropic. A one-hour meeting costs roughly 10–20¢ to summarize. Without a key, you can copy a ready-made prompt into the Claude app instead.</p>
+  </div>
+
+  <div class="field">
+    <span class="field-label">Your data</span>
+    <div class="btn-pair">
+      <button id="btn-backup" class="btn" type="button"><svg><use href="#i-down"/></svg>Back up all</button>
+      <label class="btn" for="restore-file"><svg><use href="#i-share"/></svg>Restore</label>
+    </div>
+    <input id="restore-file" type="file" accept=".json,application/json" hidden>
+    <p id="storage-note" class="field-note"></p>
+  </div>
+
+  <details class="tips">
+    <summary>Tips for iPhone</summary>
+    <ul>
+      <li><strong>Allow the microphone once.</strong> In Safari, tap <em>aA</em> › Website Settings › Microphone › Allow, so you aren't asked at every restart.</li>
+      <li><strong>Dictation must be on.</strong> Settings › General › Keyboard › Enable Dictation. Speech is processed by Apple, the same way iPhone dictation works.</li>
+      <li><strong>Keep Verbatim on screen.</strong> iOS pauses listening when you switch apps or lock the phone. Verbatim notes the gap and resumes when you come back.</li>
+      <li><strong>Long lectures:</strong> plug in, and turn off Low Power Mode, which can let the screen lock.</li>
+      <li><strong>Place the phone</strong> near whoever talks most, screen up, with nothing covering the bottom microphone.</li>
+      <li>If recording won't start from the Home Screen icon, open Verbatim in Safari instead. The Home Screen app keeps its own separate history.</li>
+    </ul>
+  </details>
+  <p class="about">Verbatim 1.0 · Speech by Apple's dictation service · Summaries by Claude</p>
+</section>
+
+<!-- Edit one transcript line -->
+<section id="sheet-segment" class="sheet" role="dialog" aria-modal="true" aria-labelledby="segment-title" hidden>
+  <div class="sheet-grip"></div>
+  <div class="sheet-head">
+    <h2 id="segment-title" class="sheet-title">Edit line</h2>
+    <span id="segment-stamp" class="sheet-stamp"></span>
+  </div>
+  <textarea id="segment-text" rows="5" aria-label="Line text"></textarea>
+  <div class="field">
+    <span class="field-label">Speaker</span>
+    <div id="segment-speakers" class="chip-row"></div>
+  </div>
+  <label class="toggle-row" for="segment-star"><span>Marked as important</span><input id="segment-star" type="checkbox" class="switch"></label>
+  <div class="sheet-actions row">
+    <button id="btn-segment-delete" class="btn btn-danger" type="button">Delete line</button>
+    <button id="btn-segment-save" class="btn btn-primary" type="button">Save</button>
+  </div>
+</section>
+
+<!-- Session options -->
+<section id="sheet-more" class="sheet" role="dialog" aria-modal="true" aria-label="Session options" hidden>
+  <div class="sheet-grip"></div>
+  <div class="menu">
+    <button type="button" data-action="rename">Rename</button>
+    <button type="button" data-action="speakers">Edit speakers</button>
+    <button type="button" data-action="type">Change to lecture</button>
+    <button type="button" data-action="export">Export…</button>
+    <button type="button" data-action="delete" class="danger">Delete recording</button>
+  </div>
+  <button class="btn" type="button" data-close>Cancel</button>
+</section>
+
+<!-- Speakers -->
+<section id="sheet-speakers" class="sheet" role="dialog" aria-modal="true" aria-labelledby="speakers-title" hidden>
+  <div class="sheet-grip"></div>
+  <div class="sheet-head">
+    <h2 id="speakers-title" class="sheet-title">Speakers</h2>
+    <button class="btn-text" type="button" data-close>Done</button>
+  </div>
+  <p class="field-note">Names appear in the transcript, exports and summary.</p>
+  <div id="speaker-fields" class="speaker-fields"></div>
+  <button id="btn-add-speaker" class="btn" type="button"><svg><use href="#i-plus"/></svg>Add speaker</button>
+</section>
+
+<!-- Generic text input -->
+<section id="sheet-input" class="sheet" role="dialog" aria-modal="true" aria-labelledby="input-title" hidden>
+  <div class="sheet-grip"></div>
+  <h2 id="input-title" class="sheet-title"></h2>
+  <p id="input-note" class="field-note" hidden></p>
+  <input id="input-line" type="text" autocomplete="off" aria-labelledby="input-title">
+  <textarea id="input-multi" rows="10" aria-labelledby="input-title" hidden></textarea>
+  <div class="sheet-actions row">
+    <button id="btn-input-cancel" class="btn" type="button">Cancel</button>
+    <button id="btn-input-ok" class="btn btn-primary" type="button">Save</button>
+  </div>
+</section>
+
+<!-- Confirm -->
+<section id="sheet-confirm" class="sheet" role="alertdialog" aria-modal="true" aria-labelledby="confirm-title" hidden>
+  <div class="sheet-grip"></div>
+  <h2 id="confirm-title" class="sheet-title"></h2>
+  <p id="confirm-body" class="confirm-body"></p>
+  <div class="sheet-actions row">
+    <button id="btn-confirm-cancel" class="btn" type="button">Cancel</button>
+    <button id="btn-confirm-ok" class="btn btn-danger" type="button"></button>
+  </div>
+</section>
+
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>
