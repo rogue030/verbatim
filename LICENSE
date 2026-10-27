@@ -1,0 +1,24 @@
+Copyright (c) 2026 rogue030. All rights reserved.
+
+This software and its source code, including all files in this repository
+except those listed below, are the property of the copyright holder.
+
+No part of this software may be copied, modified, merged, published,
+distributed, sublicensed, sold, or used to create derivative works, in whole
+or in part, without the prior written permission of the copyright holder.
+
+Viewing and forking this repository on GitHub is permitted only to the extent
+required by GitHub's Terms of Service. Using the hosted application does not
+grant any rights to its source code.
+
+THIS SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Third-party components
+----------------------
+vendor/anthropic-sdk.mjs contains third-party code that remains under its own
+licenses (MIT and Unlicense). See vendor/THIRD_PARTY_NOTICES.txt.

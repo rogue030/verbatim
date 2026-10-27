@@ -1,6 +1,6 @@
 // Caches the app so it opens without a connection. Speech recognition and
 // summaries still need the network; recordings live in IndexedDB, not here.
-const CACHE = 'verbatim-v2';
+const CACHE = 'verbatim-v3';
 const SHELL = [
   './',
   'index.html',

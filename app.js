@@ -1091,6 +1091,23 @@ async function openSettings(focus) {
   $('#storage-note').textContent = `${state.sessions.length} recordings using ${mb} on this device.${persisted ? '' : ' Safari may clear website data you haven’t opened in a while, so back up regularly.'}`;
 }
 
+/* ---------- FAQ ---------- */
+
+let faqReturnFocus = null;
+
+function openFaq() {
+  faqReturnFocus = document.activeElement;
+  $('#faq').hidden = false;
+  $('#faq .overlay-body').scrollTop = 0;
+  $('#btn-faq-done').focus();
+}
+
+function closeFaq() {
+  $('#faq').hidden = true;
+  faqReturnFocus?.focus?.();
+  faqReturnFocus = null;
+}
+
 /* ---------- session actions ---------- */
 
 async function deleteSession(s, { quiet = false } = {}) {
@@ -1476,7 +1493,19 @@ function bind() {
   // Sheets close on the scrim or a Done/Cancel button.
   $('#scrim').addEventListener('click', closeSheet);
   document.querySelectorAll('[data-close]').forEach((b) => b.addEventListener('click', closeSheet));
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSheet(); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    if (!$('#faq').hidden) closeFaq();
+    else closeSheet();
+  });
+
+  // Startup disclaimer and FAQ
+  $('#btn-agree').addEventListener('click', () => {
+    $('#disclaimer').hidden = true;
+    $('#app').inert = false;
+  });
+  document.querySelectorAll('[data-open-faq]').forEach((b) => b.addEventListener('click', openFaq));
+  $('#btn-faq-done').addEventListener('click', closeFaq);
 
   // iOS stops listening in the background; note the gap and pick up again.
   document.addEventListener('visibilitychange', () => {
@@ -1501,6 +1530,7 @@ function bind() {
 async function init() {
   applyTextSize();
   bind();
+  $('#btn-agree').focus();
   renderSupportBanner();
   try {
     state.sessions = await store.all();

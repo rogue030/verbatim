@@ -44,7 +44,8 @@
   </defs>
 </svg>
 
-<div id="app" class="app">
+<!-- The app stays inert until the startup disclaimer is accepted. -->
+<div id="app" class="app" inert>
 
   <!-- Library: start a recording, browse past sessions -->
   <section id="view-library" class="view library">
@@ -79,6 +80,7 @@
       <div id="session-list" class="session-list"></div>
 
       <p class="foot-note">Transcripts are saved on this iPhone only. Use Export or Settings&nbsp;›&nbsp;Back up to keep a copy elsewhere.</p>
+      <button class="link-btn" type="button" data-open-faq>Privacy, security and FAQ</button>
     </div>
   </section>
 
@@ -240,7 +242,8 @@
       <li>If recording won't start from the Home Screen icon, open Verbatim in Safari instead. The Home Screen app keeps its own separate history.</li>
     </ul>
   </details>
-  <p class="about">Verbatim 1.0 · Speech by Apple's dictation service · Summaries by Claude</p>
+  <button class="btn" type="button" data-open-faq>Privacy, security and FAQ</button>
+  <p class="about">Verbatim 1.0 · Speech by Apple's dictation service · Summaries by Claude<br>© 2026 rogue030. All rights reserved.</p>
 </section>
 
 <!-- Edit one transcript line -->
@@ -308,6 +311,198 @@
   <div class="sheet-actions row">
     <button id="btn-confirm-cancel" class="btn" type="button">Cancel</button>
     <button id="btn-confirm-ok" class="btn btn-danger" type="button"></button>
+  </div>
+</section>
+
+<!-- Startup disclaimer: in the markup (not added by script) so it appears on every launch. -->
+<section id="disclaimer" class="overlay" role="dialog" aria-modal="true" aria-labelledby="disc-title">
+  <div class="overlay-body">
+    <div class="wrap disc">
+      <div class="disc-brand"><img src="icons/icon.svg" alt="" width="44" height="44"><span>Verbatim</span></div>
+      <h1 id="disc-title" class="disc-title">Before you start</h1>
+      <ul class="disc-list">
+        <li><strong>Ask before you transcribe.</strong> Tell everyone you’re transcribing. Many places require everyone’s consent to record a conversation, and schools and employers often have their own rules. You’re responsible for following them.</li>
+        <li><strong>Check before you rely on it.</strong> Transcripts and AI summaries can contain mistakes. Check anything important against the original.</li>
+        <li><strong>Know where your data goes.</strong> Speech is processed by Apple’s speech recognition. Transcripts are saved only on this iPhone. Summaries send the transcript to Anthropic using your API key.</li>
+        <li><strong>No warranty.</strong> Verbatim is provided as is, without warranty of any kind. Nothing in it is legal advice.</li>
+      </ul>
+      <p class="disc-small">This notice appears every time Verbatim opens. © 2026 rogue030. All rights reserved.</p>
+    </div>
+  </div>
+  <div class="overlay-foot">
+    <div class="overlay-foot-inner">
+      <button id="btn-agree" class="btn btn-primary" type="button">I understand and agree</button>
+      <button class="btn" type="button" data-open-faq>Read the FAQ</button>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="overlay faq" role="dialog" aria-modal="true" aria-labelledby="faq-title" hidden>
+  <header class="overlay-head">
+    <div class="overlay-head-inner">
+      <h1 id="faq-title" class="overlay-title">Privacy, security and FAQ</h1>
+      <button id="btn-faq-done" class="btn-text" type="button">Done</button>
+    </div>
+  </header>
+  <div class="overlay-body">
+    <div class="wrap faq-body">
+      <p class="faq-intro">Verbatim has no server, no account, no analytics and no tracking. This page explains where your data goes, what can go wrong, and your responsibilities when you transcribe other people.</p>
+
+      <h2 class="group-label">Privacy and your data</h2>
+      <details class="qa">
+        <summary>Where do my recordings go?</summary>
+        <div class="qa-body">
+          <p>Only to these places:</p>
+          <ul>
+            <li><strong>Your voice</strong> goes to Apple’s speech recognition, the same service iPhone dictation uses. Apple may process it on its servers.</li>
+            <li><strong>The transcript, notes and settings</strong> are saved only on this iPhone, in Safari’s storage for this website.</li>
+            <li><strong>Summaries:</strong> when you ask for one, the transcript goes from your iPhone straight to Anthropic, using your own API key.</li>
+          </ul>
+        </div>
+      </details>
+      <details class="qa">
+        <summary>Is audio recorded or kept?</summary>
+        <div class="qa-body">
+          <p>Verbatim never saves audio, only text. If you allow it, Apple may keep samples of dictation audio to improve its service. To turn that off, open the Settings app › Privacy &amp; Security › Analytics &amp; Improvements and switch off <strong>Improve Siri &amp; Dictation</strong>. See <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">Apple’s privacy policy</a>.</p>
+        </div>
+      </details>
+      <details class="qa">
+        <summary>Can the developer, Anthropic or GitHub see my transcripts?</summary>
+        <div class="qa-body">
+          <p>The developer and GitHub can’t. The website only delivers the app’s code, and your transcripts stay on your iPhone.</p>
+          <p>The one exception is a summary request, which goes to Anthropic. Under Anthropic’s commercial terms, API data isn’t used to train models by default and is kept only for a limited time. See <a href="https://www.anthropic.com/legal/privacy" target="_blank" rel="noopener">Anthropic’s privacy policy</a>. If you paste the prompt into the Claude app instead, your Claude account’s privacy settings apply.</p>
+        </div>
+      </details>
+      <details class="qa">
+        <summary>How is my API key stored?</summary>
+        <div class="qa-body">
+          <p>It’s stored in Safari’s storage on this iPhone, without extra encryption, and sent only to Anthropic. The app’s security policy blocks connections to any other server. Use a key just for Verbatim, and set a monthly spending limit for it in the <a href="https://console.anthropic.com/" target="_blank" rel="noopener">Anthropic Console</a>.</p>
+        </div>
+      </details>
+      <details class="qa">
+        <summary>What does a summary cost?</summary>
+        <div class="qa-body">
+          <p>With an API key, you pay Anthropic directly. A one-hour meeting costs roughly 10–20¢. Without a key, copy the prompt into the Claude app, which uses your Claude plan instead.</p>
+        </div>
+      </details>
+      <details class="qa">
+        <summary>How do I delete my data?</summary>
+        <div class="qa-body">
+          <ul>
+            <li><strong>One recording:</strong> open it, tap ⋯, then Delete recording.</li>
+            <li><strong>The API key:</strong> in Verbatim’s Settings, leave the key field empty and tap Save.</li>
+            <li><strong>Everything:</strong> open the Settings app › Apps › Safari › Advanced › Website Data (on iOS 17, Settings › Safari › Advanced). Find rogue030.github.io and delete it.</li>
+          </ul>
+        </div>
+      </details>
+
+      <h2 class="group-label">Security and risks</h2>
+      <details class="qa">
+        <summary>Can I lose my transcripts?</summary>
+        <div class="qa-body">
+          <p>Yes. They exist only on this iPhone, so they’re lost if:</p>
+          <ul>
+            <li>Safari erases the website’s data because you haven’t opened Verbatim for about a week of browsing. Opening Verbatim regularly prevents this.</li>
+            <li>You clear Safari’s history and website data.</li>
+            <li>Your iPhone is lost, replaced or reset.</li>
+          </ul>
+          <p>Back up regularly: Verbatim Settings › <strong>Back up all</strong>, then save the file to Files or iCloud Drive. Restore it from the same screen.</p>
+        </div>
+      </details>
+      <details class="qa">
+        <summary>What if I lose my iPhone?</summary>
+        <div class="qa-body">
+          <p>Your iPhone’s passcode and built-in encryption protect your transcripts. If you saved an API key, revoke it in the Anthropic Console so nobody else can use it.</p>
+        </div>
+      </details>
+      <details class="qa">
+        <summary>Does anything else share Verbatim’s storage?</summary>
+        <div class="qa-body">
+          <p>Browsers give every site at the same address one shared storage area. Verbatim runs at rogue030.github.io, so another web app published at that address could read Verbatim’s data. Verbatim is currently the only app published there.</p>
+        </div>
+      </details>
+      <details class="qa">
+        <summary>Who controls the app’s code?</summary>
+        <div class="qa-body">
+          <p>Your iPhone loads Verbatim’s code from the GitHub account rogue030, and updates arrive automatically. Whoever controls that account can change the app. Verbatim’s security policy limits the damage a bad change could do: the page may only run its own code and may only connect to Anthropic.</p>
+        </div>
+      </details>
+      <details class="qa">
+        <summary>Is it safe on public Wi‑Fi?</summary>
+        <div class="qa-body">
+          <p>Yes. Verbatim loads over HTTPS, and summary requests to Anthropic are encrypted too.</p>
+        </div>
+      </details>
+
+      <h2 class="group-label">Recording and the law</h2>
+      <p class="faq-note">This is general information, not legal advice. The rules depend on where you are.</p>
+      <details class="qa">
+        <summary>Do I need permission to transcribe a conversation?</summary>
+        <div class="qa-body">
+          <p>Often, yes. In many places a saved transcript counts as recording a conversation. Some US states, including California, Florida, Illinois, Pennsylvania and Washington, require everyone’s consent, and so do many countries. The simplest habit: say “I’m transcribing this” at the start, and stop if anyone objects.</p>
+        </div>
+      </details>
+      <details class="qa">
+        <summary>Can I transcribe lectures?</summary>
+        <div class="qa-body">
+          <p>Check your school’s policy first. Many allow it for personal study and for accessibility needs. The lecturer usually owns the lecture content, so don’t share or publish transcripts without permission.</p>
+        </div>
+      </details>
+      <details class="qa">
+        <summary>Can I use it for work meetings?</summary>
+        <div class="qa-body">
+          <p>Check your employer’s rules on confidential information and AI tools before you summarize work meetings with Claude. In the EU and UK, a transcript is personal data of everyone who speaks in it, under the GDPR.</p>
+        </div>
+      </details>
+      <details class="qa">
+        <summary>How accurate is it?</summary>
+        <div class="qa-body">
+          <p>Accuracy depends on distance from the phone, background noise and accents. Names, numbers and technical terms are often wrong, and AI summaries can contain mistakes. Check anything important against the original. Tap any line to fix it.</p>
+        </div>
+      </details>
+
+      <h2 class="group-label">Ownership and license</h2>
+      <details class="qa">
+        <summary>Who owns my transcripts and notes?</summary>
+        <div class="qa-body">
+          <p>You do, as far as the law allows, but the words people said remain theirs. A lecture, for example, is usually the lecturer’s work. Verbatim’s developer claims no rights to your content and can’t access it.</p>
+        </div>
+      </details>
+      <details class="qa">
+        <summary>Who owns Verbatim?</summary>
+        <div class="qa-body">
+          <p>Verbatim is © 2026 rogue030. All rights reserved. Its source code may not be copied, modified or redistributed without written permission.</p>
+          <p>It includes third-party libraries under their own licenses (MIT and Unlicense), listed in <a href="vendor/THIRD_PARTY_NOTICES.txt" target="_blank" rel="noopener">THIRD_PARTY_NOTICES.txt</a>.</p>
+        </div>
+      </details>
+      <details class="qa">
+        <summary>Is there a warranty?</summary>
+        <div class="qa-body">
+          <p>No. Verbatim is provided as is, without warranty of any kind. Don’t rely on it as your only record of anything important.</p>
+        </div>
+      </details>
+
+      <h2 class="group-label">Using Verbatim</h2>
+      <details class="qa">
+        <summary>Why does recording stop when I lock the screen or switch apps?</summary>
+        <div class="qa-body">
+          <p>iPhone only lets Safari use the microphone while the page is on screen. Verbatim keeps the screen awake while recording, notes any gap in the transcript, and resumes when you come back.</p>
+        </div>
+      </details>
+      <details class="qa">
+        <summary>Why can’t I record from the Home Screen icon?</summary>
+        <div class="qa-body">
+          <p>On many iOS versions, Apple doesn’t offer speech recognition to web apps opened from the Home Screen. Open Verbatim in Safari to record. The Home Screen version keeps its own separate history.</p>
+        </div>
+      </details>
+      <details class="qa">
+        <summary>Why does Safari keep asking for the microphone?</summary>
+        <div class="qa-body">
+          <p>In Safari, tap <strong>aA</strong> in the address bar › Website Settings › Microphone › Allow.</p>
+        </div>
+      </details>
+    </div>
   </div>
 </section>
 
